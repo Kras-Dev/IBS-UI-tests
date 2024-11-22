@@ -6,6 +6,7 @@ import java.util.Properties;
 
 /**
  * Класс для хранения констант, загружаемых из файла конфигурации.
+ * {@code application.properties}
  */
 public class PropertyConstants {
     /** Базовый URL приложения */
@@ -15,7 +16,7 @@ public class PropertyConstants {
     /** Таймаут ожидания загрузки элементов в секундах */
     public static int ELEMENT_LOAD_TIMEOUT;
 /**
- * Статический блок инициализации, который загружает свойства из файла application.properties
+ * Статический блок инициализации, который загружает свойства из файла {@code application.properties}.
  */
     static {
         Properties properties = new Properties();

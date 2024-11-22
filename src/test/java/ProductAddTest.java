@@ -6,6 +6,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pages.FoodPage;
 import pages.HomePage;
 
+/**
+ * Класс ProductAddTest предназначен для тестирования операций стенда,
+ * связанных с добавлением, выборкой и удалением записей о продуктах.
+ * Этот класс наследует функциональность из класса BaseTest.
+ */
 @Tag("SandBox")
 @DisplayName("Тесты для добавления продукта в список товаров")
 public class ProductAddTest extends BaseTest {
@@ -17,7 +22,7 @@ public class ProductAddTest extends BaseTest {
      * @param foodType Тип продукта.
      * @param isExotic Признак экзотичности продукта (true/false).
      */
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index}: productName={0}, foodType={1}, isExotic={2}")
     @CsvSource({
             "Морковь, Овощ, false",
             "Банан, Фрукт, true",
