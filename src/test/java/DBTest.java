@@ -1,4 +1,6 @@
 import basetestclass.BaseDBTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -14,6 +16,7 @@ import java.sql.SQLException;
  */
 @Tag("DataBase")
 @DisplayName("Тесты на добавление продуктов в базу данных")
+@Feature("Тесты на добавление продуктов в базу данных")
 public class DBTest extends BaseDBTest {
     /**
      * Параметризованный тест, который проверяет добавление записи о продукте в базу данных.
@@ -29,6 +32,7 @@ public class DBTest extends BaseDBTest {
             "Слива, FRUIT, false"
     })
     @DisplayName("Добавление продукта в базу данных с параметрическими данными")
+    @Description("Тест проверяет добавление продукта в базу данных")
     void addDBFoodTest(String productName, String foodType, String isExotic) throws SQLException {
 
         String addQuery = String.format("INSERT INTO FOOD (FOOD_NAME, FOOD_TYPE, FOOD_EXOTIC)" +
