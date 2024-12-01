@@ -80,7 +80,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <includes>**/TestRunner.java</includes>
+<!--                    <includes>**/TestRunner.java</includes>-->
                     <argLine>
                         -Xmx2048m
                         -Dfile.encoding=${file.encoding}
