@@ -1,4 +1,6 @@
 import basetestclass.BaseTest;
+
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +15,7 @@ import pages.HomePage;
  */
 @Tag("SandBox")
 @DisplayName("Тесты для добавления продукта в список товаров")
+@Feature("Тесты для добавления продукта в список товаров")
 public class ProductAddTest extends BaseTest {
     /**
      * Тест для добавления продукта с параметризированными значениями.
@@ -29,6 +32,7 @@ public class ProductAddTest extends BaseTest {
             "Слива, Фрукт, false"
     })
     @DisplayName("Добавление продукта в список товаров с параметрическими данными")
+    @Description("Тест проверяет добавление продукта в список товаров")
     void testAddProduct(String productName, String foodType, String isExotic){
         HomePage homePage = new HomePage(driver);
         homePage.clickSandBoxMenu()
