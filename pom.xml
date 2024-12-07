@@ -18,6 +18,7 @@
         <h2database.version>2.2.224</h2database.version>
         <allure.version>2.27.0</allure.version>
 		<aspectj.version>1.9.22.1</aspectj.version>
+        <rest-assured.version>5.5.0</rest-assured.version>
     </properties>
 
     <dependencies>
@@ -69,6 +70,14 @@
             <version>${aspectj.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
