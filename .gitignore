@@ -13,6 +13,11 @@ target/
 *.iml
 *.ipr
 
+### Allure ###
+.allure/
+allure-results/
+allure-reports/
+
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -37,3 +42,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+sandbox-data.txt
+pom.xml.bak

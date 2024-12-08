@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,6 +36,7 @@ public class HomePage extends BasePage{
      *
      * @return текущий экземпляр HomePage для цепочки вызовов.
      */
+    @Step("Клик по меню \"Песочница\"")
     public HomePage clickSandBoxMenu(){
         waitForElementToBeClickable(sandBoxMenu);
         if (sandBoxMenu == null){
@@ -52,6 +54,7 @@ public class HomePage extends BasePage{
      *
      * @return текущий экземпляр HomePage для цепочки вызовов.
      */
+    @Step("Клик по подменю \"Товары\"")
     public HomePage clickProductSubMenu(){
         waitForElementToBeClickable(foodItem);
         if(foodItem == null){
@@ -69,6 +72,7 @@ public class HomePage extends BasePage{
      *
      * @return текущий экземпляр HomePage для цепочки вызовов.
      */
+    @Step("Клик по подменю \"Сброс данных\"")
     public HomePage clickResetSubMenu(){
         waitForElementToBeClickable(resetItem);
         if(resetItem == null){

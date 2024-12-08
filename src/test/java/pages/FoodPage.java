@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -52,6 +53,7 @@ public class FoodPage extends BasePage{
      * @param title Ожидаемое название страницы.
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Проверка заголовка страницы {title}")
     public FoodPage verifyPageTitle(String title){
         waitForElementToBeVisible(foodPageTitle);
         Assertions.assertEquals(title, foodPageTitle.getText(), "Заголовок страницы не совпадает с ожидаемым");
@@ -62,6 +64,7 @@ public class FoodPage extends BasePage{
      *
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Клик по кнопке \"Добавить\"")
     public FoodPage clickAddButton(){
         waitForElementToBeClickable(addButton);
         if(addButton == null){
@@ -77,6 +80,7 @@ public class FoodPage extends BasePage{
      * @param title Ожидаемый заголовок модального окна.
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Проверка заголовка {title}")
     public FoodPage verifyModalMenuLabel(String title){
         waitForElementToBeVisible(modalMenuLabel);
         Assertions.assertEquals(title, modalMenuLabel.getText(), "Заголовок страницы не совпадает с ожидаемым");
@@ -85,11 +89,12 @@ public class FoodPage extends BasePage{
     /**
      * Заполнение поля для наименования продукта.
      *
-     * @param name Наименование продукта.
+     * @param value Наименование продукта.
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
-    public FoodPage fillNameField(String name){
-        fillInputField(foodNameField, name);
+    @Step("Заполням поле значением {value}")
+    public FoodPage fillNameField(String value){
+        fillInputField(foodNameField, value);
         return this;
     }
     /**
@@ -98,6 +103,7 @@ public class FoodPage extends BasePage{
      * @param foodType Тип продукта (например, "овощ", "фрукт").
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Выбор типа продукта {foodType} из выпадающего списка")
     public FoodPage selectFoodType(String foodType){
         Select select = new Select(foodTypeList);
         select.selectByVisibleText(foodType);
@@ -109,6 +115,7 @@ public class FoodPage extends BasePage{
      * @param isExotic Флаг экзотичности, true для экзотичного продукта, false - для обычного.
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Установка флага {isExotic} экзотичности для продукта")
     public FoodPage setExoticCheckBox(boolean isExotic){
         waitForElementToBeVisible(exoticCheckBox);
         if (isExotic && !exoticCheckBox.isSelected()){
@@ -124,6 +131,7 @@ public class FoodPage extends BasePage{
      *
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Клик по кнопке \"Сохранить\"")
     public FoodPage clickSaveButton(){
         waitForElementToBeClickable(saveButton);
         if(saveButton == null){
@@ -140,6 +148,7 @@ public class FoodPage extends BasePage{
      * @param expectedType Ожидаемый тип продукта.
      * @param expectedExotic Ожидаемое значение флага экзотичности.
      */
+    @Step("Проверка последней строки таблицы продуктов после добавления нового продукта")
     public FoodPage verifyLastRow(String expectedName, String expectedType, String expectedExotic){
         driver.navigate().refresh();
         WebElement lastRow = getLastRow();
@@ -160,6 +169,7 @@ public class FoodPage extends BasePage{
      * @return Последняя строка таблицы.
      */
     public WebElement getLastRow() {
+        driver.navigate().refresh();
         List<WebElement> rows = tableRows;
         if (rows.isEmpty()) {
             Assertions.fail("Не найдено ни одной строки в таблице.");
@@ -167,11 +177,12 @@ public class FoodPage extends BasePage{
         return rows.get(rows.size() - 1);
     }
     /**
-     * Проверка сброса данных на странице
+     * Проверка сброса данных на странице.
      *
      * @param size Ожидаемое количество строк в таблице после сброса.
      * @return Текущая страница FoodPage для цепочки вызовов.
      */
+    @Step("Проверка сброса данных на странице")
     public FoodPage verifyResetData(int size){
         driver.navigate().refresh();
         Assertions.assertEquals(size, tableRows.size());
