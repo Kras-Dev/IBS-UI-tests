@@ -1,16 +1,17 @@
 import basetestclass.BaseApiTest;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Feature;
-
 import io.restassured.filter.cookie.CookieFilter;
 import io.restassured.response.Response;
 import models.FoodPojo;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
+
+import static org.hamcrest.Matchers.hasItem;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -25,6 +26,15 @@ public class ApiTest extends BaseApiTest{
     @Order(1)
     void testAddProduct() throws JsonProcessingException {
         FoodPojo newProduct = new FoodPojo("Тропический фрукт", "FRUIT", true);
+        // Сначала проверяем наличие товара
+        requestSpecification
+                .filter(new CookieFilter())
+                .when()
+                .get("/api/food")
+                .then()
+                .assertThat().statusCode(200)
+                // Убедимся, что товара нет в списке
+                .body("name", Matchers.not(hasItem(newProduct.getName())));
         // Сериализация объекта в JSON
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(newProduct);
@@ -36,6 +46,15 @@ public class ApiTest extends BaseApiTest{
                 .post("/api/food")
                 .then()
                 .assertThat().statusCode(200);
+        // Проверяем наличие нового товара в списке
+        requestSpecification
+                .filter(new CookieFilter())
+                .when()
+                .get("/api/food")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body("name", hasItem(newProduct.getName()));
     }
 
     @Test
@@ -43,6 +62,7 @@ public class ApiTest extends BaseApiTest{
     @Order(2)
     void testGetProducts() throws JsonProcessingException {
         Response response = requestSpecification
+                .filter(new CookieFilter())
                 .when()
                 .get("/api/food")
                 .then()
